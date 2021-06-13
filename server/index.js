@@ -6,7 +6,16 @@ var WebSocketJSONStream = require('@teamwork/websocket-json-stream');
 var WebSocket = require('ws');
 
 // Start ShareDB
-var share = new ShareDB({db: new ShareDBMingoMemory()});
+
+const mongodb = require('mongodb');
+const db = require('sharedb-mongo')({mongo: function(callback) {
+    mongodb.connect('mongodb://mongodb:27017/grades', callback);
+  }});
+const share = new ShareDB({db});
+
+// const db = require('sharedb-mongo')('mongodb://mongodb:27017/test', {mongoOptions: {...}});
+// const share = new ShareDB({db});
+
 
 // Create a WebSocket server
 var app = express();
