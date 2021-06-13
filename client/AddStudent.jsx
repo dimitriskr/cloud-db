@@ -7,20 +7,12 @@ var connection = require('./connection');
 function AddStudent() {
     var node;
 
-    function insertStudent(event) {
-        event.preventDefault();
-
+    function insertStudent() {
+// create connection and add
         const doc = connection.get('students', '' + index);
-        var data = {name: this.state.name, grade: this.state.grade};
+        var data = {name: input_name, grade: input_grade};
         doc.create(data);
 
-    }
-
-    function handleNameChange(e) {
-        this.setState({name: e.target.value});
-    }
-    function handleGradeChange(e) {
-        this.setState({grade: e.target.value});
     }
 
     node = <div className="details">
@@ -28,18 +20,16 @@ function AddStudent() {
         <form onSubmit={insertStudent} >
             <label>
                 Name:
-                <input type="text" name="name" onChange={handleNameChange}/>
+                <input type="text" name="name"/>
             </label>
-            <br/>
             <label>
                 Grade:
-                <input type="number" name="grade" onChange={handleGradeChange}/>
+                <input type="number"/>
             </label>
-            <br/>
-            <br/>
             <input type="submit" value="Submit"/>
         </form>
     </div>
+
     ;
 
 return node;
