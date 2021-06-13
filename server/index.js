@@ -13,8 +13,8 @@ var app = express();
 app.use(express.static('static'));
 var server = http.createServer(app);
 var wss = new WebSocket.Server({server: server});
-server.listen(8081);
-console.log('Listening on http://localhost:8081');
+server.listen(8080);
+console.log('Listening on http://localhost:8080');
 
 // Connect any incoming WebSocket connection with ShareDB
 wss.on('connection', function(ws) {
@@ -24,18 +24,19 @@ wss.on('connection', function(ws) {
 
 // Create initial documents
 var connection = share.connect();
-connection.createFetchQuery('players', {}, {}, function(err, results) {
+connection.createFetchQuery('students', {}, {}, function(err, results) {
   if (err) {
     throw err;
   }
 
   if (results.length === 0) {
+    // @todo Add student names here
     var names = ['Ada Lovelace', 'Grace Hopper', 'Marie Curie',
       'Carl Friedrich Gauss', 'Nikola Tesla', 'Claude Shannon'];
 
     names.forEach(function(name, index) {
-      var doc = connection.get('players', ''+index);
-      var data = {name: name, score: Math.floor(Math.random() * 10) * 5};
+      var doc = connection.get('students', ''+index);
+      var data = {name: name, grade: Math.floor(Math.random() * 10) * 5};
       doc.create(data);
     });
   }

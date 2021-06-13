@@ -1,5 +1,5 @@
-var PlayerList = require('./PlayerList.jsx');
-var PlayerSelector = require('./PlayerSelector.jsx');
+var StudentList = require('./StudentList.jsx');
+var StudentSelector = require('./StudentSelector.jsx');
 var React = require('react');
 var _ = require('underscore');
 var connection = require('./connection');
@@ -8,21 +8,21 @@ class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedPlayerId: null,
-      players: []
+      selectedStudentId: null,
+      students: []
     };
-    this.handlePlayerSelected = this.handlePlayerSelected.bind(this);
+    this.handleStudentSelected = this.handleStudentSelected.bind(this);
     this.handleAddPoints = this.handleAddPoints.bind(this);
   }
 
   componentDidMount() {
     var comp = this;
-    var query = connection.createSubscribeQuery('players', {$sort: {score: -1}});
+    var query = connection.createSubscribeQuery('students', {$sort: {grade: -1}});
     query.on('ready', update);
     query.on('changed', update);
 
     function update() {
-      comp.setState({players: query.results});
+      comp.setState({students: query.results});
     }
   }
 
@@ -30,19 +30,19 @@ class Leaderboard extends React.Component {
     query.destroy();
   }
 
-  selectedPlayer() {
-    return _.find(this.state.players, function(x) {
-      return x.id === this.state.selectedPlayerId;
+  selectedStudent() {
+    return _.find(this.state.students, function(x) {
+      return x.id === this.state.selectedStudentId;
     }.bind(this));
   }
 
-  handlePlayerSelected(id) {
-    this.setState({selectedPlayerId: id});
+  handleStudentSelected(id) {
+    this.setState({selectedStudentId: id});
   }
 
   handleAddPoints() {
-    var op = [{p: ['score'], na: 5}];
-    connection.get('players', this.state.selectedPlayerId).submitOp(op, function(err) {
+    var op = [{p: ['grade'], na: 5}];
+    connection.get('students', this.state.selectedStudentId).submitOp(op, function(err) {
       if (err) { console.error(err); return; }
     });
   }
@@ -51,9 +51,9 @@ class Leaderboard extends React.Component {
     return (
       <div>
         <div className="leaderboard">
-          <PlayerList {...this.state} onPlayerSelected={this.handlePlayerSelected} />
+          <StudentList {...this.state} onStudentSelected={this.handleStudentSelected} />
         </div>
-        <PlayerSelector selectedPlayer={this.selectedPlayer()} onAddPoints={this.handleAddPoints} />
+        <StudentSelector selectedStudent={this.selectedStudent()} onAddPoints={this.handleAddPoints} />
       </div>
     );
   }

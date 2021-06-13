@@ -2,14 +2,14 @@ var PropTypes = require('prop-types');
 var React = require('react');
 var classNames = require('classnames');
 
-class Player extends React.Component {
+class Student extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
-    this.props.onPlayerSelected(this.props.doc.id);
+    this.props.onStudentSelected(this.props.doc.id);
   }
 
   componentDidMount() {
@@ -30,23 +30,23 @@ class Player extends React.Component {
 
   render() {
     var classes = {
-      'player': true,
+      'student': true,
       'selected': this.props.selected
     };
 
     return (
       <li className={classNames(classes)} onClick={this.handleClick}>
         <span className="name">{this.props.doc.data.name}</span>
-        <span className="score">{this.props.doc.data.score}</span>
+        <span className="grade">{this.props.doc.data.grade}</span>
       </li>
     );
   }
 }
 
-Player.propTypes = {
+Student.propTypes = {
   doc: PropTypes.object.isRequired,
-  onPlayerSelected: PropTypes.func.isRequired,
+  onStudentSelected: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired
 };
 
-module.exports = Player;
+module.exports = Student;
