@@ -12,7 +12,7 @@ class Leaderboard extends React.Component {
       students: []
     };
     this.handleStudentSelected = this.handleStudentSelected.bind(this);
-    this.handleAddPoints = this.handleAddPoints.bind(this);
+    this.handleChangeGrade = this.handleChangeGrade.bind(this);
   }
 
   componentDidMount() {
@@ -40,11 +40,16 @@ class Leaderboard extends React.Component {
     this.setState({selectedStudentId: id});
   }
 
-  handleAddPoints() {
-    var op = [{p: ['grade'], na: 5}];
-    connection.get('students', this.state.selectedStudentId).submitOp(op, function(err) {
-      if (err) { console.error(err); return; }
-    });
+  handleChangeGrade(event) {
+    if (event.key === 'Enter') {
+      var op = [{p: ['grade'], oi: event.target.value}];
+      console.log(op);
+      connection.get('students', this.state.selectedStudentId).submitOp(op, function(err) {
+        if (err) { console.error(err); return; }
+      });
+    }
+
+
   }
 
   render() {
@@ -53,7 +58,7 @@ class Leaderboard extends React.Component {
         <div className="leaderboard">
           <StudentList {...this.state} onStudentSelected={this.handleStudentSelected} />
         </div>
-        <StudentSelector selectedStudent={this.selectedStudent()} onAddPoints={this.handleAddPoints} />
+        <StudentSelector selectedStudent={this.selectedStudent()} onChangeGrade={this.handleChangeGrade} />
       </div>
     );
   }
