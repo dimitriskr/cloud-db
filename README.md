@@ -1,27 +1,14 @@
-# Leaderboard
+# Realtime database backend for course grading
 
-![Demo](demo.gif)
+This is a dockerised application using ShareDB, MongoDB and Docker that allows to grade students of a course and sort them by grade.
 
-This is a port of [Leaderboard](https://github.com/percolatestudio/react-leaderboard) to
-ShareDB.
+It is based on the [ShareDB example Leaderboard](https://github.com/share/sharedb/tree/master/examples/leaderboard)
 
-In this demo, data is not persisted. To persist data, run a Mongo
-server and initialize ShareDB with the
-[ShareDBMongo](https://github.com/share/sharedb-mongo) database adapter.
+For the frontend it uses [ReactJS](https://reactjs.org/)
 
-## Install dependencies
+The data is stored in the MongoDB database
 
-Make sure you're in the `examples/leaderboard` folder so that it uses the `package.json` located here).
-```
-npm install
-```
+Check the [Install file](docs/INSTALL.md) for more information
 
-## Build JavaScript bundle and run server
-```
-npm run build && npm start
-```
-
-Finally, open the example app in the browser. It runs on port 8080 by default:
-[http://localhost:8080](http://localhost:8080)
-
-For testing out the real-time aspects of this demo, you'll want to open two browser windows!
+## Warning
+There's a bug in sorting the studens. The grades are saved as string and proper sorting cannot take place
