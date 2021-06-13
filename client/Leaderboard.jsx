@@ -1,5 +1,6 @@
 var StudentList = require('./StudentList.jsx');
 var StudentSelector = require('./StudentSelector.jsx');
+var AddStudent = require('./AddStudent.jsx');
 var React = require('react');
 var _ = require('underscore');
 var connection = require('./connection');
@@ -43,12 +44,10 @@ class Leaderboard extends React.Component {
   handleChangeGrade(event) {
     if (event.key === 'Enter') {
       var op = [{p: ['grade'], oi: event.target.value}];
-      console.log(op);
       connection.get('students', this.state.selectedStudentId).submitOp(op, function(err) {
         if (err) { console.error(err); return; }
       });
     }
-
 
   }
 
@@ -59,6 +58,7 @@ class Leaderboard extends React.Component {
           <StudentList {...this.state} onStudentSelected={this.handleStudentSelected} />
         </div>
         <StudentSelector selectedStudent={this.selectedStudent()} onChangeGrade={this.handleChangeGrade} />
+        <AddStudent />
       </div>
     );
   }
