@@ -10,7 +10,7 @@ function StudentSelector({ selectedStudent, onChangeGrade }) {
       <div className="grade" >
         <label>
           Grade:
-          <input type="text" onKeyPress={onChangeGrade}/>
+          <input type="number" onKeyPress={onChangeGrade} defaultValue={selectedStudent.data.grade}/>
         </label>
        <br/> Press "Enter" to insert the new grade
       </div>
