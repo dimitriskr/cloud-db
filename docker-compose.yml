@@ -18,6 +18,4 @@ services:
       - PGID=1000
     volumes:
       - ./server/mongodb/database:/data/db
-    ports:
-      - 27017:27017
     restart: unless-stopped
