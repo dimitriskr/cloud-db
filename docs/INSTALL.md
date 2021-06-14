@@ -1,3 +1,7 @@
+# Requirements
+
+[docker-compose](https://docs.docker.com/compose/)
+
 # Installation instructions
 
 * Run `docker-compose up --build -d` to build the image and start the application.
