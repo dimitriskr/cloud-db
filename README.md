@@ -5,10 +5,22 @@ This is a dockerised application using ShareDB, MongoDB and Docker that allows t
 It is based on the [ShareDB example Leaderboard](https://github.com/share/sharedb/tree/master/examples/leaderboard)
 
 For the frontend it uses [ReactJS](https://reactjs.org/)
-
+    
 The data is stored in the MongoDB database
 
 Check the [Install file](docs/INSTALL.md) for more information
 
 ## Warning
-There's a bug in sorting the students. The grades are saved as string and proper sorting cannot take place. ShareDB uses JSON0 OT Type which has limited
+There's a bug in sorting the students. The grades are saved as strings instead of integers and proper sorting cannot take place. ShareDB uses JSON0 OT Type which has limited functionalities regarding numbers
+
+# Demo
+
+<!-- blank line -->
+<figure class="video_container">
+    <video controls="false" allowfullscreen="false">
+<source src="demo.webm" type="video/webm">
+</video>
+</figure>
+<!-- blank line -->
+
+
