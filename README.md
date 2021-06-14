@@ -11,4 +11,4 @@ The data is stored in the MongoDB database
 Check the [Install file](docs/INSTALL.md) for more information
 
 ## Warning
-There's a bug in sorting the students. The grades are saved as string and proper sorting cannot take place. ShareDB uses JSON0 OT Type which has limited
+There's a bug in sorting the students. The grades are saved as strings instead of numbers and proper sorting cannot take place. ShareDB uses JSON0 OT Type which has limited functionalities in regards to numbers
